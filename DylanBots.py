@@ -1,6 +1,6 @@
 import numpy as np
 
-class Dylan1:
+class HotStartOpportunist:
     
     def evaluate_round(self, opponent_previous_choices, n_peace_pre_strike=3):   
         # If this is the first round, I always defect
@@ -23,17 +23,64 @@ class Dylan1:
                 return opponent_previous_choices[-1]
     
     def __init__(self, pid=0):
-        self.name = "dylan1"
+        self.name = "hot-start-opportunist"
         if (pid > 0):
             self.name = self.name+"-"+str(pid)
         
-class Dylan2:
+class HotStartWithGrudge:
     
     def evaluate_round(self, opponent_previous_choices):
         
         # If this is the first round, I always defect
         if   (len(opponent_previous_choices) == 0):
             return 1
+        
+        # Did the opponent defect last round?
+        last_round_defect = opponent_previous_choices[-1]
+        
+        # If they did, I strike back
+        if (last_round_defect):
+            return 1
+        
+        # If they did not strike last round
+        else:
+            # Have they ever defected?
+            opp_defected = (np.sum(opponent_previous_choices) > 0)
+            if not opp_defected:
+                return 0   # if not, I won't defect either
+            
+            # Count how many turns since opponent last defected
+            last_defection_found = False
+            nturns_since_defect  = 1
+            while not last_defection_found:
+                val = opponent_previous_choices[int(-1*nturns_since_defect)]
+                if (val > 0):
+                    last_defection_found = True
+                else:
+                    nturns_since_defect += 1
+                    
+            # For every turn since last time opponent defected, probability I defect drops by 10%
+            p_defect = np.min([0., 1.- 0.10*nturns_since_defect])
+            
+            # Given that probability, decide if I defect
+            rando = np.random.rand()
+            if (rando < p_defect):
+                return 1 # I defect
+            else:
+                return 0 # I don't
+                 
+    def __init__(self, pid=0):
+        self.name = "hot-start-with-a-grudge"
+        if (pid > 0):
+            self.name = self.name+"-"+str(pid)
+
+class RetalitoryCooperator:
+    
+    def evaluate_round(self, opponent_previous_choices):
+        
+        # If this is the first round, I always remain
+        if   (len(opponent_previous_choices) == 0):
+            return 0
         
         # Did the opponent defect last round?
         last_round_defect = opponent_previous_choices[-1]
@@ -70,6 +117,6 @@ class Dylan2:
                 return 0 # I don't
                  
     def __init__(self, pid=0):
-        self.name = "dylan2"
+        self.name = "retalitory-cooperator"
         if (pid > 0):
             self.name = self.name+"-"+str(pid)
