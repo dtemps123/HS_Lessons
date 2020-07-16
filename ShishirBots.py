@@ -20,7 +20,7 @@ class TatForTit:
                     return 0
                 else:
                     return 1
-    def __init__(self,pid):
+    def __init__(self,pid=0):
         self.name = "tat-for-tit"
         if(pid>0):
             self.name=self.name+"-"+str(pid)
@@ -39,7 +39,7 @@ class GTT:
                     return 0
                 else:
                     return 1
-    def __init__(self,pid):
+    def __init__(self,pid=0):
         self.name = "GTT"
         if(pid>0):
             self.name=self.name+"-"+str(pid)

@@ -8,9 +8,9 @@ class ChaoticNice:
 
 		# "lesser retaliatory strike"
 		elif (np.sum(opponent_previous_choices[-10:])==0):
-				return 0
-			else:
-				return 1
+			return 0
+		else:
+			return 1
 
 	def __init__(self, pid=0):
 		self.name = "chaotic nice"
