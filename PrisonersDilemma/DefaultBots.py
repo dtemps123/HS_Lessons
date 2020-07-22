@@ -58,7 +58,7 @@ class MassiveRetalitoryStrike:
             return 0
     
     def __init__(self, pid=0):
-        self.name = "massive retaliatory strike"
+        self.name = "massive-retaliatory-strike"
         if (pid > 0): 
             self.name = self.name+"-"+str(pid)
         
