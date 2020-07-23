@@ -143,6 +143,7 @@ class BiasedStatisticalStriker:
         # Lower  bias factors mean lower probability of retaliating with a strike
         # 1.0 is neutral
         bias_factor = 0.5
+        bias_factor = 1.0 if (bias_factor <= 0) else bias_factor
 
         # If this is the first round, I always remain
         if   (len(opponent_previous_choices) == 0):
