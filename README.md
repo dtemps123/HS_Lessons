@@ -7,7 +7,7 @@ Requirements:
 
 To "clone" this git repository, open a terminal, and navigate to where you would like to create a new folder using `cd`. Then run the following:
 `git clone -b master_unanswered git@github.com:dtemps123/HS_Lessons.git`
-This should create a new folder and copy the code over. Git is installed by default on Mac/Linux. If you cannot get git to work, you can download a zip archive of the repository using the webpage. Once you have the code cloned, do the following.
+This should create a new folder and copy the code over. Git is installed by default on Mac/Linux. If you cannot get git to work, you can download a zip archive of the repository using the webpage. If you have to download the xip archive, make sure you're on the right mbrach from the drop-dpwn menu: `master_unanswered` not `master`. Once you have the code cloned, do the following.
 
 ## On UNIX
 Move into the cloned directory (the following line assumes you are still in the directory where you issued the clone command):
